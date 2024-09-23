@@ -5,11 +5,22 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\MissionController;
 use App\Http\Controllers\PurchaseRequestController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\MissionReportController;
 
 
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+
+
+{/*MissionReports*/}
+Route::get('/mission-reports', [MissionReportController::class, 'index']); 
+Route::post('/mission-reports', [MissionReportController::class, 'store']); 
+Route::get('/mission-reports/{id}', [MissionReportController::class, 'show']); 
+Route::put('/mission-reports/{id}', [MissionReportController::class, 'update']); 
+Route::delete('/mission-reports/{id}', [MissionReportController::class, 'destroy']); 
+
 
 {/*PurchaseRequest*/}
 Route::get('/purchase-requests', [PurchaseRequestController::class, 'index']); 
