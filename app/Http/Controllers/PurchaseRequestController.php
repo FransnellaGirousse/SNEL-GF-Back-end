@@ -7,17 +7,24 @@ use Illuminate\Http\Request;
 
 class PurchaseRequestController extends Controller
 {
+    public function index()
+    {
+        $purchaseRequests = PurchaseRequest::all();
+        return response()->json($purchaseRequests, 200);
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'additional_costs' => 'required|string|max:255',
-            'daily_rating_coefficient' => 'required|string|max:255',
-            'date' => 'required|date',
-            'informations' => 'required|string',
-            'per_diem_rate' => 'required|string|max:255',
-            'percentage_of_advance_required' => 'required|string|max:255',
-            'signature' => 'required|string|max:255',
-            'total_amount' => 'required|string|max:255',
+            'description' => 'required|string',
+            'estimated_total' => 'required|numeric',
+            'estimated_unit_price' => 'required|numeric',
+            'geo_code' => 'required|string',
+            'item' => 'required|string',
+            'notes' => 'nullable|string',
+            'project_code' => 'required|string',
+            'quantity' => 'required|integer',
+            'unit_type' => 'required|string',
         ]);
 
         $purchaseRequest = PurchaseRequest::create($validatedData);
@@ -26,12 +33,6 @@ class PurchaseRequestController extends Controller
             'message' => 'Demande d\'achat créée avec succès',
             'purchase_request' => $purchaseRequest
         ], 201);
-    }
-
-    public function index()
-    {
-        $purchaseRequests = PurchaseRequest::all();
-        return response()->json($purchaseRequests, 200);
     }
 
     public function show($id)
@@ -54,14 +55,15 @@ class PurchaseRequestController extends Controller
         }
 
         $validatedData = $request->validate([
-            'additional_costs' => 'required|string|max:255',
-            'daily_rating_coefficient' => 'required|string|max:255',
-            'date' => 'required|date',
-            'informations' => 'required|string',
-            'per_diem_rate' => 'required|string|max:255',
-            'percentage_of_advance_required' => 'required|string|max:255',
-            'signature' => 'required|string|max:255',
-            'total_amount' => 'required|string|max:255',
+            'description' => 'required|string',
+            'estimated_total' => 'required|numeric',
+            'estimated_unit_price' => 'required|numeric',
+            'geo_code' => 'required|string',
+            'item' => 'required|string',
+            'notes' => 'nullable|string',
+            'project_code' => 'required|string',
+            'quantity' => 'required|integer',
+            'unit_type' => 'required|string',
         ]);
 
         $purchaseRequest->update($validatedData);
