@@ -7,9 +7,9 @@ use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\MissionReportController;
 use App\Http\Controllers\RequestInAdvanceController;
 use App\Http\Controllers\PurchaseRequestController;
+use App\Http\Controllers\Auth\RegisterController;  
 
-
-
+Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
